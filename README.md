@@ -4,11 +4,14 @@
 
 ## Installation
 
-npm install -g capp
+```bash
+$ npm install -g capp
+```
 
 ## Usage
 
-```
+```bash
+
 Usage: capp [command] [path, uri]
 
 Commands:
