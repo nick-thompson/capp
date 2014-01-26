@@ -85,7 +85,13 @@ function push (directory, uri, callback) {
     if (err) return callback.call(null, err);
     loadAttachments(doc, directory, function (err, doc) {
       if (err) return callback.call(null, err);
-      db.insert(doc, doc._id, callback);
+      db.get(doc._id, function (err, body) {
+        if (err && err.reason !== "missing") return callback.call(null, err);
+        if (body && body._rev) {
+          doc._rev = body._rev;
+        }
+        db.insert(doc, doc._id, callback);
+      });
     });
   });
 }
